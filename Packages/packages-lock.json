@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "809d23edae0df58fd0f61b4b6f67855c59d1b2fb"
     },
+    "com.daitokuamy.gameaibehaviour": {
+      "version": "https://github.com/DaitokuAmy/game-ai-behaviour.git?path=/Packages/com.daitokuamy.gameaibehaviour",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c2fd8afcca7fa386462e40eab6b1e12e14a2a93b"
+    },
     "com.sabanishi.screensystem": {
       "version": "https://github.com/sabanishi/ScreenSystem.git?path=/Packages/com.sabanishi.screensystem",
       "depth": 0,
