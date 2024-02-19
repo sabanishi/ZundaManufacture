@@ -7,6 +7,15 @@
       "dependencies": {},
       "hash": "809d23edae0df58fd0f61b4b6f67855c59d1b2fb"
     },
+    "com.sabanishi.screensystem": {
+      "version": "https://github.com/sabanishi/ScreenSystem.git?path=/Packages/com.sabanishi.screensystem",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.cysharp.unitask": "2.5.0"
+      },
+      "hash": "0bb3e5c0be70f4a1faf6572d4dd3d6abfb26cac6"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
