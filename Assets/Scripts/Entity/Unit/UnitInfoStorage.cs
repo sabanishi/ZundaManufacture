@@ -1,4 +1,3 @@
-using Sabanishi.ZundaManufacture.Common;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity

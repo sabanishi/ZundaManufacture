@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sabanishi.ZundaManufacture.Common
+namespace Sabanishi.ZundaManufacture
 {
     public class SingletonMonoBehaviour<T> : MonoBehaviour where T:MonoBehaviour
     {

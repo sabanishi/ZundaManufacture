@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using GameFramework.ActorSystems;
 using GameFramework.ModelSystems;
 using GameFramework.TaskSystems;
-using Sabanishi.ZundaManufacture.Common;
 
 namespace Sabanishi.ZundaManufacture.Entity
 {

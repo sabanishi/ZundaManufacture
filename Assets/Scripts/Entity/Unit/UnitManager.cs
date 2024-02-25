@@ -1,7 +1,6 @@
 using GameFramework.ActorSystems;
 using GameFramework.BodySystems;
 using GameFramework.TaskSystems;
-using Sabanishi.ZundaManufacture.Common;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
@@ -15,13 +14,9 @@ namespace Sabanishi.ZundaManufacture.Entity
             _bodyManager = bodyManager;
         }
 
-        public void AttachActor(UnitModel model, ActorEntity entity)
+        public void AttachActor(UnitModel model)
         {
-            if (entity == null)
-            {
-                DebugLogger.LogWarning("ActorEntityがnullです");
-                return;
-            }
+            if (!TryGetActorEntity(model, out var entity)) return;
 
             var body = CreateBody(model.Info);
             if (body == null || !body.IsValid)
@@ -48,19 +43,20 @@ namespace Sabanishi.ZundaManufacture.Entity
             RegisterTask(animatorController,TaskOrder.Body);
         }
 
-        public void DetachActor(UnitModel model, ActorEntity entity)
+        public void DetachActor(UnitModel model)
         {
+            if (!TryGetActorEntity(model, out var entity)) return;
             entity.RemoveLogic<UnitPresenter>();
             entity.RemoveLogic<UnitBrain>();
             entity.RemoveLogic<UnitAnimatorController>();
             entity.RemoveActors();
-            entity.RemoveBody(false);
+            entity.RemoveBody();
         }
         
         private Body CreateBody(UnitInfo info)
         {
-            var instance = ResourceManager.Instance.Load<GameObject>(info.ModelPath);
-            return _bodyManager.CreateFromGameObject(instance);
+            var prefab = ResourceManager.Instance.Load<GameObject>(info.ModelPath);
+            return _bodyManager.CreateFromPrefab(prefab);
         }
     }
 }

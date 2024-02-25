@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sabanishi.ZundaManufacture.Common
+namespace Sabanishi.ZundaManufacture
 {
     /// <summary>
     /// リソースを管理するためのクラス

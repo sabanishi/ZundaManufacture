@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sabanishi.ScreenSystem;
-using Sabanishi.ZundaManufacture.Common;
 using Sabanishi.ZundaManufacture.MainGame;
 using UnityEngine;
 

@@ -1,5 +1,6 @@
 using GameFramework.Core;
 using GameFramework.LogicSystems;
+using R3;
 
 namespace Sabanishi.ZundaManufacture.MainGame
 {
@@ -20,6 +21,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
         protected override void ActivateInternal(IScope scope)
         {
+            _view.OnTmpButtonClickObservable.TakeUntil(scope).Subscribe(_=>_model.TmpCreate());
             _unitStoragePresenter.Activate();
         }
         

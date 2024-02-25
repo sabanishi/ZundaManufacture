@@ -1,5 +1,6 @@
 using GameFramework.Core;
 using GameFramework.ModelSystems;
+using Sabanishi.ZundaManufacture.Entity;
 
 namespace Sabanishi.ZundaManufacture.MainGame
 {
@@ -20,6 +21,11 @@ namespace Sabanishi.ZundaManufacture.MainGame
         protected override void OnDeletedInternal()
         {
             _unitStorage.Dispose();
+        }
+
+        public void TmpCreate()
+        {
+            _unitStorage.CreateUnit(UnitType.Kiritan);
         }
     }
 }

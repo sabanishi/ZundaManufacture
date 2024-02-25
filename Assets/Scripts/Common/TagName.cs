@@ -1,4 +1,4 @@
-﻿namespace Sabanishi.ZundaManufacture.Common
+﻿namespace Sabanishi.ZundaManufacture
 {
 	/// <summary>
 	/// タグ名を定数で管理するクラス

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sabanishi.ZundaManufacture.Common
+namespace Sabanishi.ZundaManufacture
 {
     public static class EnumerableExtensions
     {

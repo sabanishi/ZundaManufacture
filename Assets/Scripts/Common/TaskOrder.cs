@@ -1,4 +1,4 @@
-namespace Sabanishi.ZundaManufacture.Common
+namespace Sabanishi.ZundaManufacture
 {
     public enum TaskOrder
     {
