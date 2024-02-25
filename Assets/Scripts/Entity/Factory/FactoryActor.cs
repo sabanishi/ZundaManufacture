@@ -2,9 +2,9 @@ using GameFramework.BodySystems;
 
 namespace Sabanishi.ZundaManufacture.Entity
 {
-    public class UnitActor:EntityActor
+    public class FactoryActor:EntityActor
     {
-        public UnitActor(Body body) : base(body)
+        public FactoryActor(Body body) : base(body)
         {
         }
     }

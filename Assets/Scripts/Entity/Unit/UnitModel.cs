@@ -1,8 +1,6 @@
-using GameFramework.ModelSystems;
-
 namespace Sabanishi.ZundaManufacture.Entity
 {
-    public class UnitModel:AutoIdModel<UnitModel>
+    public class UnitModel:EntityModel
     {
         private UnitInfo _info;
         public UnitInfo Info => _info;
@@ -13,7 +11,7 @@ namespace Sabanishi.ZundaManufacture.Entity
 
         public static UnitModel Create(UnitInfo info)
         {
-            var model = Create();
+            var model = Create<UnitModel>();
             model.Setup(info);
             return model;
         }
