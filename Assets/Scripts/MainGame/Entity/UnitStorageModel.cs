@@ -1,4 +1,7 @@
+using GameFramework.Core;
 using GameFramework.ModelSystems;
+using Sabanishi.ZundaManufacture.Entity;
+using UnityEngine.Rendering;
 
 namespace Sabanishi.ZundaManufacture.MainGame
 {
