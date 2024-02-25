@@ -33,6 +33,8 @@ namespace Sabanishi.ZundaManufacture.MainGame
             var manager = Services.Get<UnitManager>();
             var entity = manager.GetOrCreateEntity(unitModel);
             manager.AttachActor(unitModel);
+            var body = entity.GetBody();
+            body.Transform.SetParent(_view.transform);
             _unitDict.Add(unitModel, entity);
         }
         

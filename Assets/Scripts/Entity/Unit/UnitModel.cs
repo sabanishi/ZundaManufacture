@@ -7,7 +7,7 @@ namespace Sabanishi.ZundaManufacture.Entity
         private UnitInfo _info;
         public UnitInfo Info => _info;
         
-        public UnitModel(int id) : base(id)
+        private UnitModel(int id) : base(id)
         {
         }
 
