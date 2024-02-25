@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sabanishi.ZundaManufacture.Common
+namespace Sabanishi.ZundaManufacture
 {
     public class SingletonMonoBehaviour<T> : MonoBehaviour where T:MonoBehaviour
     {
@@ -29,10 +29,12 @@ namespace Sabanishi.ZundaManufacture.Common
             {
                 Destroy(gameObject);
             }
+            OnAwakeInternal();
         }
 
         private void OnDestroy()
         {
+            OnDestroyInternal();
             if (Instance == this)
             {
                 Instance = null;

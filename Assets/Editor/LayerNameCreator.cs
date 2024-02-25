@@ -50,7 +50,7 @@ namespace Sabanishi.ZundaManufacture.Editor
         {
             var builder = new StringBuilder();
             
-            AppendLine(0,"namespace Sabanishi.ZundaManufacture.Common", builder);
+            AppendLine(0,"namespace Sabanishi.ZundaManufacture", builder);
             AppendLine(0,"{", builder);
             
             AppendLine(1,"/// <summary>", builder);

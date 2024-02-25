@@ -3,7 +3,7 @@ using R3.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sabanishi.ZundaManufacture.Common
+namespace Sabanishi.ZundaManufacture
 {
     public static class ButtonRxExtensions
     {
