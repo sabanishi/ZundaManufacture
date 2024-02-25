@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Sabanishi.ZundaManufacture.MainGame;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.ScreenSystem
