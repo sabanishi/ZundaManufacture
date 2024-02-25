@@ -29,10 +29,12 @@ namespace Sabanishi.ZundaManufacture.Common
             {
                 Destroy(gameObject);
             }
+            OnAwakeInternal();
         }
 
         private void OnDestroy()
         {
+            OnDestroyInternal();
             if (Instance == this)
             {
                 Instance = null;
