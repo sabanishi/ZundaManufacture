@@ -4,6 +4,7 @@
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.daitokuamy.gameaibehaviour": "https://github.com/DaitokuAmy/game-ai-behaviour.git?path=/Packages/com.daitokuamy.gameaibehaviour",
     "com.daitokuamy.gameframework": "https://github.com/DaitokuAmy/game-framework.git?path=/Packages/com.daitokuamy.gameframework",
+    "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
     "com.sabanishi.screensystem": "https://github.com/sabanishi/ScreenSystem.git?path=/Packages/com.sabanishi.screensystem",
     "com.unity.animation.rigging": "1.2.1",
     "com.unity.ide.rider": "3.0.27",

@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af0d6f8aea73415ea0969097183d5beb, type: 3}
   m_Name: UnitInfoStorage
   m_EditorClassIdentifier: 
-  unitInfos: []
+  unitInfos:
+  - type: 0
+    modelPath: 
