@@ -1,19 +1,17 @@
-using GameFramework.ModelSystems;
-
 namespace Sabanishi.ZundaManufacture.Entity
 {
-    public class FactoryModel:SingleModel<FactoryModel>
+    public class FactoryModel:EntityModel
     {
         private FactoryInfo _info;
         public FactoryInfo Info => _info;
         
-        private FactoryModel(object empty) : base(empty)
+        private FactoryModel(int id) : base(id)
         {
         }
         
         public static FactoryModel Create(FactoryInfo info)
         {
-            var model = Create();
+            var model = Create<FactoryModel>();
             model.Setup(info);
             return model;
         }
