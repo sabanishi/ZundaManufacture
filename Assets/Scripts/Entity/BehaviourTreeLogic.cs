@@ -58,19 +58,13 @@ namespace Sabanishi.ZundaManufacture.Entity
         private void BindBehaviourTreeController()
         {
             if (!_actor.Body.IsValid) return;
-            if (!_actor.Body.GameObject.TryGetComponent<BehaviourTreeControllerProvider>(out var provider))
-            {
-                provider = _actor.Body.GameObject.AddComponent<BehaviourTreeControllerProvider>();
-            }
-
-            provider.Set(TreeController);
+            _actor.BtControllerProviderParentGimmick.AddProvider(TreeController,TreeController.Tree.name);
         }
         
         private void UnbindBehaviourTreeController()
         {
             if (!_actor.Body.IsValid) return;
-            if (!_actor.Body.GameObject.TryGetComponent<BehaviourTreeControllerProvider>(out var provider)) return;
-            provider.Set(null);
+            _actor.BtControllerProviderParentGimmick.RemoveProvider(TreeController);
         }
     }
 }

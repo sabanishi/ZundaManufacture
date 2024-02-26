@@ -1,33 +1,70 @@
+using System.Linq;
 using GameFramework.BodySystems;
+using GameFramework.Core;
+using R3;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
 {
     public class UnitActor:EntityActor
     {
-        private Vector3 _moveVelocity;
-        public Vector3 MoveVelocity => _moveVelocity;
+        private const string AnimatorGimmickKey = "UnitAnimatorGimmick";
+        
+        private readonly UnitAnimatorGimmick _animatorGimmick;
+
+        private readonly ReactiveProperty<Vector3> _moveVelocity;
+        public ReadOnlyReactiveProperty<Vector3> MoveVelocity => _moveVelocity;
+        
+        #region Getter
+
+        public Animator GetAnimator()
+        {
+            return _animatorGimmick.MyAnimator;
+        }
+        
+        #endregion
         
         public UnitActor(Body body) : base(body)
         {
+            _moveVelocity = new ReactiveProperty<Vector3>().ScopeTo(this);
+            
+            _animatorGimmick = GimmickController.GetGimmicks<UnitAnimatorGimmick>(AnimatorGimmickKey).FirstOrDefault();
+            if (_animatorGimmick == default)
+            {
+                DebugLogger.LogError($"[{Body.GameObject.name}] UnitAnimatorGimmickが設定されていません");
+            }
+        }
+
+        protected override void ActivateInternal(IScope scope)
+        {
+            base.ActivateInternal(scope);
+            _animatorGimmick.Activate();
+        }
+
+        protected override void DeactivateInternal()
+        {
+            base.DeactivateInternal();
+            _animatorGimmick.Deactivate();
         }
 
         protected override void UpdateInternal()
         {
             base.UpdateInternal();
             Move();
+            var layer = Body.LayeredTime;
+            _animatorGimmick.SetAnimatorSpeed(layer.TimeScale);
         }
 
         private void Move()
         {
             var deltaTime = Body.DeltaTime;
-            var nextPos = Body.Transform.position + _moveVelocity * deltaTime;
+            var nextPos = Body.Transform.position + _moveVelocity.Value * deltaTime;
             Body.Transform.position = nextPos;
         }
         
         public void SetMoveVelocity(Vector3 moveVelocity)
         {
-            _moveVelocity = moveVelocity;
+            _moveVelocity.Value = moveVelocity;
             LookTargetDir(moveVelocity);
         }
 
