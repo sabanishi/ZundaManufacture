@@ -16,5 +16,15 @@ namespace Sabanishi.ZundaManufacture.Entity
             var speed = 2.0f;
             return model.DoMoveTargetPosAsync(targetPos, speed);
         }
+        
+        public AsyncOperationHandle DoRestAction(UnitModel model)
+        {
+            return model.DoRestAsync();
+        }
+
+        public AsyncOperationHandle DoIdleAction(UnitModel model)
+        {
+            return model.DoIdleAsync(1.0f);
+        }
     }
 }

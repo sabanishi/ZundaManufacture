@@ -13,7 +13,6 @@ namespace Sabanishi.ZundaManufacture.Entity
     {
         private CoroutineRunner _coroutineRunner;
         private DisposableScope _actionScope;
-        
         private Subject<Vector3> _setPositionSubject;
         private Subject<Vector3> _setEulerAngleSubject;
         
@@ -35,7 +34,7 @@ namespace Sabanishi.ZundaManufacture.Entity
             _setEulerAngleSubject = new Subject<Vector3>().ScopeTo(scope);
             _actionScope = new DisposableScope().ScopeTo(scope);
         }
-        
+
         public virtual void Update(float deltaTime)
         {
             _coroutineRunner.Update();

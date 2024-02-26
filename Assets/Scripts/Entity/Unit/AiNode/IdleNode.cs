@@ -2,16 +2,16 @@ using GameFramework.Core;
 
 namespace Sabanishi.ZundaManufacture.Entity
 {
-    public class RandomWalkNode:BaseUnitNode
+    public class IdleNode:BaseUnitNode
     {
     }
 
-    public class RandomWalkHandler :BaseUnitHandler<RandomWalkNode>
+    public class IdleHandler : BaseUnitHandler<IdleNode>
     {
         protected override AsyncOperationHandle SetupHandle()
         {
             var service = Services.Get<UnitActionService>();
-            return service.DoRandomWalkAction(Model);
+            return service.DoIdleAction(Model);
         }
     }
 }

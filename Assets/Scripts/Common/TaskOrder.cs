@@ -6,6 +6,7 @@ namespace Sabanishi.ZundaManufacture
         Logic,
         AiLogic,
         Body,
-        Actor
+        Actor,
+        Ui
     }
 }

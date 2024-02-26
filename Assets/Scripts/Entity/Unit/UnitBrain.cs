@@ -1,7 +1,12 @@
+using GameFramework.Core;
+using R3;
+
 namespace Sabanishi.ZundaManufacture.Entity
 {
     public class UnitBrain : BehaviourTreeLogic
     {
+        private const string HealthKey = "Health";
+        
         private readonly UnitModel _model;
         private readonly UnitActor _actor;
         
@@ -11,9 +16,17 @@ namespace Sabanishi.ZundaManufacture.Entity
             _actor = actor;
         }
 
+        protected override void ActivateInternal(IScope scope)
+        {
+            base.ActivateInternal(scope);
+            _model.Health.NowValue.Subscribe(OnUpdateHealth).RegisterTo(scope);
+        }
+
         protected override void BindActionHandlersInternal()
         {
             TreeController.BindActionNodeHandler<RandomWalkNode, RandomWalkHandler>(h => h.Setup(_model));
+            TreeController.BindActionNodeHandler<IdleNode, IdleHandler>(h => h.Setup(_model));
+            TreeController.BindActionNodeHandler<RestNode,RestHandler>(h => h.Setup(_model));
         }
 
         protected override void SetupTree()
@@ -24,6 +37,11 @@ namespace Sabanishi.ZundaManufacture.Entity
                 return;
             }
             TreeController.Setup(_model.Info.AiTree);
+        }
+        
+        private void OnUpdateHealth(float health)
+        {
+            TreeController.Blackboard.SetFloat(HealthKey,health);
         }
     }
 }
