@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5032177291405068779
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7774819b8896c6439f456332d2df66f, type: 3}
+  m_Name: FloatCondition
+  m_EditorClassIdentifier: 
+  leftValue:
+    useProperty: 0
+    constValue: 0
+    propertyName: 
+  rightValue:
+    useProperty: 0
+    constValue: 0
+    propertyName: 
+  operatorType: 0
+--- !u!114 &-4499008584175907036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d18bf1db1334f2d8023426a7851c74, type: 3}
+  m_Name: IfNode
+  m_EditorClassIdentifier: 
+  guid: 95fffa0f2d9d342a5b597a269b92542f
+  position: {x: -129, y: 238}
+  title: IsSpeed0
+  child: {fileID: 7585617972164995369}
+  conditions:
+    conditions:
+    - {fileID: -5032177291405068779}
+--- !u!114 &-4220998474758746723
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2281bb7f377a4b2c890a665ed98375b2, type: 3}
+  m_Name: AnimatorNode
+  m_EditorClassIdentifier: 
+  guid: 0aec8949356ba41a69d6bd210964a8b0
+  position: {x: 138.5, y: 238.00005}
+  title: WalkAnimation
+  subRoutine: {fileID: 0}
+  animationName: walk
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c4b5c83ab7686489f1b4fa4ca9532e, type: 3}
+  m_Name: UnitAnimatorTree
+  m_EditorClassIdentifier: 
+  memo: 
+  rootNode: {fileID: 8056650572657941726}
+  nodes:
+  - {fileID: 8056650572657941726}
+  - {fileID: -4499008584175907036}
+  - {fileID: 7585617972164995369}
+  - {fileID: -4220998474758746723}
+  - {fileID: 7960348906118603726}
+  blackboardAsset: {fileID: 11400000, guid: c34799c14cd974eb9b88203a6ab4675c, type: 2}
+--- !u!114 &7585617972164995369
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2281bb7f377a4b2c890a665ed98375b2, type: 3}
+  m_Name: AnimatorNode
+  m_EditorClassIdentifier: 
+  guid: a9d11260f4d064247a180e57e9b8fa8c
+  position: {x: -128.85004, y: 368.25}
+  title: IdleAnimation
+  subRoutine: {fileID: 0}
+  animationName: Idle
+--- !u!114 &7960348906118603726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9063987a68c79c44d89f8f57869fd9d1, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  guid: d739d28a466154ff5a259a8f4f327bf8
+  position: {x: -11.500007, y: 56.349995}
+  title: 
+  children:
+  - {fileID: -4499008584175907036}
+  - {fileID: -4220998474758746723}
+  forceSuccess: 0
+--- !u!114 &8056650572657941726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20ca020fcdcbff4cb6cf4a92eb703db, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  guid: da226d74603b44954849df86f3dc8a36
+  position: {x: -11.500024, y: -69.068054}
+  title: 
+  child: {fileID: 7960348906118603726}

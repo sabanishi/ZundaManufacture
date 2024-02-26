@@ -16,4 +16,4 @@ MonoBehaviour:
   - type: 0
     modelPath: Kiritan
     aiTree: {fileID: 11400000, guid: 9db50d38f40124c7daf433fdc16b290d, type: 2}
-    animationTree: {fileID: 0}
+    animationTree: {fileID: 11400000, guid: 21bc8a8b7037d40518f1e503bf0c5b77, type: 2}

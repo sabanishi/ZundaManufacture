@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Threading;
 using GameFramework.ActorSystems;
 using GameFramework.BodySystems;
@@ -11,17 +12,42 @@ namespace Sabanishi.ZundaManufacture.Entity
 {
     public class EntityActor:Actor
     {
+        private const string BtControllerProviderParentGimmickName = "BtControllerProviderParentGimmick";
+        
         private DisposableScope _actionScope;
         private CoroutineRunner _coroutineRunner;
         
+        private readonly BtControllerProviderParentGimmick _btControllerProviderParentGimmick;
+        public BtControllerProviderParentGimmick BtControllerProviderParentGimmick => _btControllerProviderParentGimmick;
+        
+        protected GimmickController GimmickController { get; }
+        
         protected EntityActor(Body body) : base(body)
         {
+            GimmickController = body.GetController<GimmickController>();
+            if (GimmickController == null)
+            {
+                GimmickController = new GimmickController();
+                ((IBody) body).AddController(GimmickController);
+            }
+            
+            _btControllerProviderParentGimmick = GimmickController.GetGimmicks<BtControllerProviderParentGimmick>(BtControllerProviderParentGimmickName).FirstOrDefault();
+            if (_btControllerProviderParentGimmick == default)
+            {
+                DebugLogger.LogError("BtControllerProviderParentGimmickがアタッチされていません");
+            }
         }
 
         protected override void ActivateInternal(IScope scope)
         {
             _actionScope = new DisposableScope().ScopeTo(scope);
             _coroutineRunner = new CoroutineRunner().ScopeTo(scope);
+            _btControllerProviderParentGimmick.Activate();
+        }
+
+        protected override void DeactivateInternal()
+        {
+            _btControllerProviderParentGimmick.Deactivate();
         }
 
         protected override void UpdateInternal()

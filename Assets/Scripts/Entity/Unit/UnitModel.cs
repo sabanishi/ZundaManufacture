@@ -48,8 +48,15 @@ namespace Sabanishi.ZundaManufacture.Entity
                 
                 //目標地点への移動が完了するまで待機
                 var epsilon = 0.01f;
-                while (Vector3.Distance(Position, targetPos) > epsilon)
+                var cacheDist = Mathf.Infinity;
+                while (true)
                 {
+                    var dist = Vector3.Distance(Position, targetPos);
+                    //目標地点に充分近づいていたら、移動を終了する
+                    if (dist < epsilon) break;
+                    //Unitが反対方向に向かっていたら、移動を終了する
+                    if (cacheDist < dist) break;
+                    cacheDist = dist;
                     yield return null;
                 }
             }
