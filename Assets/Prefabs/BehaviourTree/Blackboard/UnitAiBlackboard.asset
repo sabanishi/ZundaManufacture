@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce717d51a273b46c6b69ca33003b6196, type: 3}
   m_Name: UnitAiBlackboard
   m_EditorClassIdentifier: 
-  properties: []
+  properties:
+  - propertyName: Health
+    propertyType: 1
+    integerValue: 0
+    floatValue: 0
+    stringValue: 
+    booleanValue: 0

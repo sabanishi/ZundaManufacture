@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5996399240131041432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2281bb7f377a4b2c890a665ed98375b2, type: 3}
+  m_Name: AnimatorNode
+  m_EditorClassIdentifier: 
+  guid: 49dec0f9e339a4d32bd0e321a107cf11
+  position: {x: -360.00006, y: 238.00005}
+  title: RestAniamation
+  subRoutine: {fileID: 0}
+  animationName: rest
 --- !u!114 &-5032177291405068779
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13,9 +30,9 @@ MonoBehaviour:
   m_Name: FloatCondition
   m_EditorClassIdentifier: 
   leftValue:
-    useProperty: 0
+    useProperty: 1
     constValue: 0
-    propertyName: 
+    propertyName: Speed
   rightValue:
     useProperty: 0
     constValue: 0
@@ -57,6 +74,46 @@ MonoBehaviour:
   title: WalkAnimation
   subRoutine: {fileID: 0}
   animationName: walk
+--- !u!114 &-3627161290983650175
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d18bf1db1334f2d8023426a7851c74, type: 3}
+  m_Name: IfNode
+  m_EditorClassIdentifier: 
+  guid: e1ec22fd8ab8d4cd9ac9a1d26529bed4
+  position: {x: -360, y: 56.499992}
+  title: IsResting
+  child: {fileID: -5996399240131041432}
+  conditions:
+    conditions:
+    - {fileID: -2197557362923634156}
+--- !u!114 &-2197557362923634156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d92910406f2c45dfb507fe9d0faba4f, type: 3}
+  m_Name: BooleanCondition
+  m_EditorClassIdentifier: 
+  leftValue:
+    useProperty: 1
+    constValue: 0
+    propertyName: IsResting
+  rightValue:
+    useProperty: 0
+    constValue: 1
+    propertyName: 
+  operatorType: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +134,29 @@ MonoBehaviour:
   - {fileID: 7585617972164995369}
   - {fileID: -4220998474758746723}
   - {fileID: 7960348906118603726}
+  - {fileID: 3956589841740891446}
+  - {fileID: -3627161290983650175}
+  - {fileID: -5996399240131041432}
   blackboardAsset: {fileID: 11400000, guid: c34799c14cd974eb9b88203a6ab4675c, type: 2}
+--- !u!114 &3956589841740891446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9063987a68c79c44d89f8f57869fd9d1, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  guid: 365d3bdfae4e9454fa25be6c95604e42
+  position: {x: -189.45, y: -100.40007}
+  title: 
+  children:
+  - {fileID: -3627161290983650175}
+  - {fileID: 7960348906118603726}
+  forceSuccess: 0
 --- !u!114 &7585617972164995369
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +206,6 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   guid: da226d74603b44954849df86f3dc8a36
-  position: {x: -11.500024, y: -69.068054}
+  position: {x: -189.45, y: -239.40007}
   title: 
-  child: {fileID: 7960348906118603726}
+  child: {fileID: 3956589841740891446}

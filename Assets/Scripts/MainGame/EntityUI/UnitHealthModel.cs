@@ -1,5 +1,6 @@
 using GameFramework.Core;
 using R3;
+using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.MainGame
 {
@@ -28,7 +29,8 @@ namespace Sabanishi.ZundaManufacture.MainGame
         
         public void SetValue(float value)
         {
-            _nowValue.Value = value;
+            var clampedValue = Mathf.Clamp(value, 0, 1);
+            _nowValue.Value =clampedValue;
         }
     }
 }

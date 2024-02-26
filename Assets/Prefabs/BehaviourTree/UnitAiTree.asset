@@ -1,5 +1,26 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7012706181042003710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7774819b8896c6439f456332d2df66f, type: 3}
+  m_Name: FloatCondition
+  m_EditorClassIdentifier: 
+  leftValue:
+    useProperty: 1
+    constValue: 0
+    propertyName: Health
+  rightValue:
+    useProperty: 0
+    constValue: 0
+    propertyName: 
+  operatorType: 0
 --- !u!114 &-4846649896890276768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15,7 +36,45 @@ MonoBehaviour:
   guid: d71bf64b8bcd44bfc93e4f9855b92c5d
   position: {x: 0, y: -2}
   title: 
-  child: {fileID: -1280335434749257893}
+  child: {fileID: -4644518500110352012}
+--- !u!114 &-4644518500110352012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9063987a68c79c44d89f8f57869fd9d1, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  guid: 3ffbe0661ba0949388e6134d82e5c78a
+  position: {x: -0.0000052452087, y: 170.50002}
+  title: 
+  children:
+  - {fileID: -3213814885002829481}
+  - {fileID: -44865839379907948}
+  forceSuccess: 0
+--- !u!114 &-3213814885002829481
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d18bf1db1334f2d8023426a7851c74, type: 3}
+  m_Name: IfNode
+  m_EditorClassIdentifier: 
+  guid: b3e0fbed623084710b607bbc000e5e24
+  position: {x: -114.00001, y: 300.00006}
+  title: IsNeedRest
+  child: {fileID: 5264765200549286110}
+  conditions:
+    conditions:
+    - {fileID: -7012706181042003710}
 --- !u!114 &-1280335434749257893
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -29,9 +88,28 @@ MonoBehaviour:
   m_Name: RandomWalkNode
   m_EditorClassIdentifier: 
   guid: 28fbfe3690ea5400391118b63f879142
-  position: {x: 0, y: 183.5}
+  position: {x: 299.99997, y: 436.99997}
   title: 
   subRoutine: {fileID: 0}
+--- !u!114 &-44865839379907948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe1dcdbfdacd874c896be43fbb7c097, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  guid: ef540fec0a13941dc8c98435f13a6e67
+  position: {x: 150.00002, y: 300.00006}
+  title: 
+  children:
+  - {fileID: 7657282228619323064}
+  - {fileID: -1280335434749257893}
+  forceSuccess: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,4 +127,41 @@ MonoBehaviour:
   nodes:
   - {fileID: -4846649896890276768}
   - {fileID: -1280335434749257893}
+  - {fileID: -4644518500110352012}
+  - {fileID: -3213814885002829481}
+  - {fileID: -44865839379907948}
+  - {fileID: 7657282228619323064}
+  - {fileID: 5264765200549286110}
   blackboardAsset: {fileID: 11400000, guid: 5b7b547fd0a7d43e5b5b15de03c69dbb, type: 2}
+--- !u!114 &5264765200549286110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030e3d274e064a5a8c171a7c195249ea, type: 3}
+  m_Name: RestNode
+  m_EditorClassIdentifier: 
+  guid: d93bcf7921b294a1da3ee099cbabd83d
+  position: {x: -114.00002, y: 437}
+  title: 
+  subRoutine: {fileID: 0}
+--- !u!114 &7657282228619323064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ee59ee479c4e7891496009a8a9e951, type: 3}
+  m_Name: IdleNode
+  m_EditorClassIdentifier: 
+  guid: 1424d3898b1934667acfd15be2454900
+  position: {x: 118.1113, y: 436.99997}
+  title: 
+  subRoutine: {fileID: 0}

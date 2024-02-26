@@ -7,6 +7,7 @@ namespace Sabanishi.ZundaManufacture.Entity
     public class UnitAnimatorController:BehaviourTreeLogic
     {
         private const string SpeedKey = "Speed";
+        private const string IsRestingKey = "IsResting";
         
         private readonly UnitModel _model;
         private readonly UnitActor _actor;
@@ -21,6 +22,7 @@ namespace Sabanishi.ZundaManufacture.Entity
         {
             base.ActivateInternal(scope);
             _actor.MoveVelocity.Subscribe(OnUpdateSpeed).RegisterTo(scope);
+           _model.IsResting.Subscribe(OnUpdateHealth).RegisterTo(scope);
         }
 
         protected override void SetupTree()
@@ -42,6 +44,11 @@ namespace Sabanishi.ZundaManufacture.Entity
         {
             var speed = velocity.magnitude;
             TreeController.Blackboard.SetFloat(SpeedKey,speed);
+        }
+
+        protected void OnUpdateHealth(bool isResting)
+        {
+            TreeController.Blackboard.SetBoolean(IsRestingKey,isResting);
         }
     }
 }

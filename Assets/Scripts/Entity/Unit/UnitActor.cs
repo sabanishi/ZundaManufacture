@@ -65,11 +65,14 @@ namespace Sabanishi.ZundaManufacture.Entity
         public void SetMoveVelocity(Vector3 moveVelocity)
         {
             _moveVelocity.Value = moveVelocity;
-            LookTargetDir(moveVelocity);
+            if (moveVelocity != Vector3.zero)
+            {
+                LookTargetDir(moveVelocity);
+            }
         }
 
         /// <summary>
-        /// targetPosの方向を向く
+        /// targetPosを見る
         /// </summary>
         private void LookTargetPos(Vector3 targetPos)
         {
@@ -78,6 +81,9 @@ namespace Sabanishi.ZundaManufacture.Entity
             LookTargetDir(moveDirection);
         }
 
+        /// <summary>
+        /// dirの方向を向く
+        /// </summary>
         private void LookTargetDir(Vector3 dir)
         {
             var angle = Mathf.Atan2(dir.x,dir.z) * Mathf.Rad2Deg;

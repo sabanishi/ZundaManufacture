@@ -5,7 +5,6 @@ using GameFramework.Core;
 using GameFramework.CoroutineSystems;
 using GameFramework.ModelSystems;
 using R3;
-using Sabanishi.ZundaManufacture.MainGame;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
