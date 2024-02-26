@@ -23,9 +23,9 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
         protected override void ActivateInternal(IScope scope)
         {
-            _model.Units.ObserveAdd().TakeUntil(scope).Subscribe(x => OnCreateUnit(x.Value));
-            _model.Units.ObserveRemove().TakeUntil(scope).Subscribe(x => OnDestroyUnit(x.Value));
-            _model.Units.ObserveReset().TakeUntil(scope).Subscribe(_ => OnClearUnits());
+            _model.Units.ObserveAdd().Subscribe(x => OnCreateUnit(x.Value)).RegisterTo(scope);
+            _model.Units.ObserveRemove().Subscribe(x => OnDestroyUnit(x.Value)).RegisterTo(scope);
+            _model.Units.ObserveReset().Subscribe(_ => OnClearUnits()).RegisterTo(scope);
         }
 
         private void OnCreateUnit(UnitModel unitModel)

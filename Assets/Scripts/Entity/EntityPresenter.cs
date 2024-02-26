@@ -1,6 +1,7 @@
 using GameFramework.ActorSystems;
 using GameFramework.Core;
 using R3;
+using Sabanishi.ZundaManufacture.MainGame;
 
 namespace Sabanishi.ZundaManufacture.Entity
 {
@@ -17,8 +18,8 @@ namespace Sabanishi.ZundaManufacture.Entity
 
         protected override void ActivateInternal(IScope scope)
         {
-            _model.SetPositionObservable.TakeUntil(scope).Subscribe(_actor.SetPosition);
-            _model.SetEulerAngleObservable.TakeUntil(scope).Subscribe(_actor.SetEulerAngle);
+            _model.SetPositionObservable.Subscribe(_actor.SetPosition).RegisterTo(scope);
+            _model.SetEulerAngleObservable.Subscribe(_actor.SetEulerAngle).RegisterTo(scope);
         }
 
         protected override void UpdateInternal()

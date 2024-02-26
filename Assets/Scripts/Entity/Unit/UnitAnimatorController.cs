@@ -20,7 +20,7 @@ namespace Sabanishi.ZundaManufacture.Entity
         protected override void ActivateInternal(IScope scope)
         {
             base.ActivateInternal(scope);
-            _actor.MoveVelocity.TakeUntil(scope).Subscribe(OnUpdateSpeed);
+            _actor.MoveVelocity.Subscribe(OnUpdateSpeed).RegisterTo(scope);
         }
 
         protected override void SetupTree()

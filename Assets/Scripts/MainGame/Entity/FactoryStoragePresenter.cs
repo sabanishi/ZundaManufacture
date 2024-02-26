@@ -23,9 +23,9 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
         protected override void ActivateInternal(IScope scope)
         {
-            _model.Factories.ObserveAdd().TakeUntil(scope).Subscribe(x=>OnCreateFactory(x.Value));
-            _model.Factories.ObserveRemove().TakeUntil(scope).Subscribe(x=>OnDestroyFactory(x.Value));
-            _model.Factories.ObserveReset().TakeUntil(scope).Subscribe(_=>OnClearFactories());
+            _model.Factories.ObserveAdd().Subscribe(x=>OnCreateFactory(x.Value)).RegisterTo(scope);
+            _model.Factories.ObserveRemove().Subscribe(x=>OnDestroyFactory(x.Value)).RegisterTo(scope);
+            _model.Factories.ObserveReset().Subscribe(_=>OnClearFactories()).RegisterTo(scope);
         }
         
         private void OnCreateFactory(FactoryModel factoryModel)

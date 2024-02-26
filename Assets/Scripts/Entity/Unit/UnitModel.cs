@@ -1,6 +1,7 @@
 using System.Collections;
 using GameFramework.Core;
 using R3;
+using Sabanishi.ZundaManufacture.MainGame;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
@@ -9,9 +10,11 @@ namespace Sabanishi.ZundaManufacture.Entity
     {
         private UnitInfo _info;
         private Subject<Vector3> _setMoveVelocitySubject;
+        private UnitHealthModel _health;
         
         public UnitInfo Info => _info;
         public Observable<Vector3> SetMoveVelocityObservable => _setMoveVelocitySubject;
+        public UnitHealthModel Health => _health;
         
         private UnitModel(int id) : base(id)
         {
@@ -21,6 +24,8 @@ namespace Sabanishi.ZundaManufacture.Entity
         {
             base.OnCreatedInternal(scope);
             _setMoveVelocitySubject = new Subject<Vector3>().ScopeTo(scope);
+            _health = UnitHealthModel.Create<UnitHealthModel>().ScopeTo(scope);
+            _health.SetOffset(new Vector3(0,2.37f,0));
         }
 
         public static UnitModel Create(UnitInfo info)

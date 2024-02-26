@@ -1,5 +1,6 @@
 using GameFramework.Core;
 using R3;
+using Sabanishi.ZundaManufacture.MainGame;
 
 namespace Sabanishi.ZundaManufacture.Entity
 {
@@ -17,7 +18,27 @@ namespace Sabanishi.ZundaManufacture.Entity
         protected override void ActivateInternal(IScope scope)
         {
             base.ActivateInternal(scope);
-            _model.SetMoveVelocityObservable.TakeUntil(scope).Subscribe(_actor.SetMoveVelocity);
+            _model.SetMoveVelocityObservable.Subscribe(_actor.SetMoveVelocity).RegisterTo(scope);
+            RegisterUi(_model.Health);
+        }
+
+        protected override void DeactivateInternal()
+        {
+            base.DeactivateInternal();
+            UnregisterUi(_model.Health);
+        }
+
+        private void RegisterUi(EntityUiModel uiModel)
+        {
+            var uiStorage = Services.Get<EntityUiStoragePresenter>();
+            var targetTransform = _actor.Body.Transform;
+            uiStorage.CreateElement(uiModel,targetTransform);
+        }
+        
+        private void UnregisterUi(EntityUiModel uiModel)
+        {
+            var uiStorage = Services.Get<EntityUiStoragePresenter>();
+            uiStorage.DestroyElement(uiModel);
         }
     }
 }
