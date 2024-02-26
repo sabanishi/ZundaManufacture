@@ -1,25 +1,28 @@
-using GameAiBehaviour;
-using GameFramework.ActorSystems;
-
 namespace Sabanishi.ZundaManufacture.Entity
 {
-    public class UnitAnimatorController:ActorEntityLogic
+    public class UnitAnimatorController:BehaviourTreeLogic
     {
         private readonly UnitModel _model;
         private readonly UnitActor _actor;
 
-        private readonly BehaviourTreeController _btController;
-        
-        public UnitAnimatorController(UnitModel model, UnitActor actor)
+        public UnitAnimatorController(UnitModel model,UnitActor actor) : base(actor)
         {
             _model = model;
             _actor = actor;
-            _btController = new BehaviourTreeController();
         }
 
-        protected override void DisposeInternal()
+        protected override void SetupTree()
         {
-            _btController.Dispose();
+            if (_model.Info == null)
+            {
+                DebugLogger.LogError("UnitInfo is null");
+                return;
+            }
+            TreeController.Setup(_model.Info.AnimationTree);
+        }
+        
+        protected override void BindActionHandlersInternal()
+        {
         }
     }
 }

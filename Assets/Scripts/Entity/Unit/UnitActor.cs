@@ -1,5 +1,4 @@
 using GameFramework.BodySystems;
-using GameFramework.Core;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
@@ -7,6 +6,7 @@ namespace Sabanishi.ZundaManufacture.Entity
     public class UnitActor:EntityActor
     {
         private Vector3 _moveVelocity;
+        public Vector3 MoveVelocity => _moveVelocity;
         
         public UnitActor(Body body) : base(body)
         {
