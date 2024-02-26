@@ -1,4 +1,5 @@
 using System;
+using GameAiBehaviour;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
@@ -11,7 +12,11 @@ namespace Sabanishi.ZundaManufacture.Entity
     {
         [SerializeField] private UnitType type;
         [SerializeField] private string modelPath;
+        [SerializeField] private BehaviourTree aiTree;
+        [SerializeField] private BehaviourTree animationTree;
         public UnitType Type => type;
         public string ModelPath => modelPath;
+        public BehaviourTree AiTree => aiTree;
+        public BehaviourTree AnimationTree => animationTree;
     }
 }

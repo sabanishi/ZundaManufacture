@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4846649896890276768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20ca020fcdcbff4cb6cf4a92eb703db, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  guid: d71bf64b8bcd44bfc93e4f9855b92c5d
+  position: {x: 0, y: -2}
+  title: 
+  child: {fileID: -1280335434749257893}
+--- !u!114 &-1280335434749257893
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 129ebc4726b049408b587c0dd0ec115a, type: 3}
+  m_Name: RandomWalkNode
+  m_EditorClassIdentifier: 
+  guid: 28fbfe3690ea5400391118b63f879142
+  position: {x: 0, y: 183.5}
+  title: 
+  subRoutine: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c4b5c83ab7686489f1b4fa4ca9532e, type: 3}
+  m_Name: UnitAiTree
+  m_EditorClassIdentifier: 
+  memo: 
+  rootNode: {fileID: -4846649896890276768}
+  nodes:
+  - {fileID: -4846649896890276768}
+  - {fileID: -1280335434749257893}
+  blackboardAsset: {fileID: 11400000, guid: 5b7b547fd0a7d43e5b5b15de03c69dbb, type: 2}

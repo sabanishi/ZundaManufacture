@@ -1,3 +1,6 @@
+using GameFramework.Core;
+using R3;
+
 namespace Sabanishi.ZundaManufacture.Entity
 {
     public class UnitPresenter:EntityPresenter
@@ -9,6 +12,12 @@ namespace Sabanishi.ZundaManufacture.Entity
         {
             _model = model;
             _actor = actor;
+        }
+
+        protected override void ActivateInternal(IScope scope)
+        {
+            base.ActivateInternal(scope);
+            _model.SetMoveVelocityObservable.TakeUntil(scope).Subscribe(_actor.SetMoveVelocity);
         }
     }
 }
