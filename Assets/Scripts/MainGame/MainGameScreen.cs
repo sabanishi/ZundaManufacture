@@ -19,10 +19,8 @@ namespace Sabanishi.ZundaManufacture.MainGame
         private ServiceContainer _serviceContainer;
         private TaskRunner _taskRunner;
         
-        private BodyManager _unitBodyManager;
         private UnitInfoStorage _unitInfoStorage;
         
-        private BodyManager _factoryBodyManager;
         private FactoryInfoStorage _factoryInfoStorage;
 
         protected override UniTask InitializeInternal(CancellationToken token)
@@ -35,14 +33,19 @@ namespace Sabanishi.ZundaManufacture.MainGame
             _taskRunner = new TaskRunner();
             _serviceContainer.Set(_taskRunner);
             
-            _unitBodyManager = new BodyManager();
-            var unitManager = new UnitManager(_taskRunner, _unitBodyManager);
+            var layeredTime = new LayeredTime();
+            _serviceContainer.Set(layeredTime);
+            
+            var unitBodyManager = new BodyManager();
+            var unitManager = new UnitManager(_taskRunner, unitBodyManager);
             _serviceContainer.Set(unitManager);
             _unitInfoStorage = ResourceManager.Instance.Load<UnitInfoStorage>("UnitInfoStorage");
             _serviceContainer.Set(_unitInfoStorage);
+            var unitActionService = new UnitActionService();
+            _serviceContainer.Set(unitActionService);
             
-            _factoryBodyManager = new BodyManager();
-            var factoryManager = new FactoryManager(_taskRunner, _factoryBodyManager);
+            var factoryBodyManager = new BodyManager();
+            var factoryManager = new FactoryManager(_taskRunner, factoryBodyManager);
             _serviceContainer.Set(factoryManager);
             _factoryInfoStorage = ResourceManager.Instance.Load<FactoryInfoStorage>("FactoryInfoStorage");
             _serviceContainer.Set(_factoryInfoStorage);
@@ -57,14 +60,20 @@ namespace Sabanishi.ZundaManufacture.MainGame
             _presenter.Dispose();
             
             _serviceContainer.Dispose();
-            _taskRunner.Dispose();
             
-            _unitBodyManager.Dispose();
             Destroy(_unitInfoStorage);
-            
-            _factoryBodyManager.Dispose();
             Destroy(_factoryInfoStorage);
             return UniTask.CompletedTask;
+        }
+
+        private void Update()
+        {
+            _taskRunner?.Update();
+        }
+
+        private void LateUpdate()
+        {
+            _taskRunner?.LateUpdate();
         }
     }
 }

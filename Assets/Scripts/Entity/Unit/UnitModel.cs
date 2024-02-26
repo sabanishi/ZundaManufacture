@@ -1,12 +1,26 @@
+using System.Collections;
+using GameFramework.Core;
+using R3;
+using UnityEngine;
+
 namespace Sabanishi.ZundaManufacture.Entity
 {
     public class UnitModel:EntityModel
     {
         private UnitInfo _info;
+        private Subject<Vector3> _setMoveVelocitySubject;
+        
         public UnitInfo Info => _info;
+        public Observable<Vector3> SetMoveVelocityObservable => _setMoveVelocitySubject;
         
         private UnitModel(int id) : base(id)
         {
+        }
+
+        protected override void OnCreatedInternal(IScope scope)
+        {
+            base.OnCreatedInternal(scope);
+            _setMoveVelocitySubject = new Subject<Vector3>().ScopeTo(scope);
         }
 
         public static UnitModel Create(UnitInfo info)
@@ -15,10 +29,32 @@ namespace Sabanishi.ZundaManufacture.Entity
             model.Setup(info);
             return model;
         }
-
+        
         private void Setup(UnitInfo info)
         {
             _info = info;
+        }
+
+        /// <summary>
+        /// 目標地点まで移動する
+        /// </summary>
+        public AsyncOperationHandle DoMoveTargetPosAsync(Vector3 targetPos,float speed)
+        {
+            IEnumerator Routine(AsyncOperator asyncOperator)
+            {
+                //Actorに移動速度の情報を送信する
+                var velocitySpeed = (targetPos - Position).normalized * speed;
+                _setMoveVelocitySubject.OnNext(velocitySpeed);
+                
+                //目標地点への移動が完了するまで待機
+                var epsilon = 0.01f;
+                while (Vector3.Distance(Position, targetPos) > epsilon)
+                {
+                    yield return null;
+                }
+            }
+
+            return DoActionAsync(Routine);
         }
     }
 }
