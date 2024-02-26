@@ -34,7 +34,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
             _serviceContainer.Set(_taskRunner);
             
             //Presenterの要素のうち、シングルトンにするものをServiceContainerに登録
-            _serviceContainer.Set(_presenter.EntityUiStorage);
+            _serviceContainer.Set(_presenter.EntityUiManager);
             
             var layeredTime = new LayeredTime();
             _serviceContainer.Set(layeredTime);

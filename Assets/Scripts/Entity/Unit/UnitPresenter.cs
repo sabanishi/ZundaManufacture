@@ -30,14 +30,14 @@ namespace Sabanishi.ZundaManufacture.Entity
 
         private void RegisterUi(EntityUiModel uiModel)
         {
-            var uiStorage = Services.Get<EntityUiStoragePresenter>();
+            var uiStorage = Services.Get<EntityUiManagerPresenter>();
             var targetTransform = _actor.Body.Transform;
             uiStorage.CreateElement(uiModel,targetTransform);
         }
         
         private void UnregisterUi(EntityUiModel uiModel)
         {
-            var uiStorage = Services.Get<EntityUiStoragePresenter>();
+            var uiStorage = Services.Get<EntityUiManagerPresenter>();
             uiStorage.DestroyElement(uiModel);
         }
     }

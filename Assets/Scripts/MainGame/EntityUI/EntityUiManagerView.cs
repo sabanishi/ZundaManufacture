@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.MainGame
 {
-    public class EntityUiStorageView:MonoBehaviour
+    public class EntityUiManagerView:MonoBehaviour
     {
         [SerializeField] private Camera worldCamera;
         [SerializeField] private UnitHealthView unitHealthViewPrefab;

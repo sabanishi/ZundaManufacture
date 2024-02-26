@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.MainGame
 {
-    public class EntityUiStoragePresenter : Logic
+    public class EntityUiManagerPresenter : Logic
     {
-        private readonly EntityUiStorageView _view;
+        private readonly EntityUiManagerView _view;
         private readonly Dictionary<EntityUiModel, EntityUiPresenter> _elements;
 
-        public EntityUiStoragePresenter(EntityUiStorageView view)
+        public EntityUiManagerPresenter(EntityUiManagerView view)
         {
             _view = view;
             _elements = new Dictionary<EntityUiModel, EntityUiPresenter>();
