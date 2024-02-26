@@ -14,9 +14,13 @@ namespace Sabanishi.ZundaManufacture.Entity
         [SerializeField] private string modelPath;
         [SerializeField] private BehaviourTree aiTree;
         [SerializeField] private BehaviourTree animationTree;
+
+        [SerializeField] private float maxHealth;
+        
         public UnitType Type => type;
         public string ModelPath => modelPath;
         public BehaviourTree AiTree => aiTree;
         public BehaviourTree AnimationTree => animationTree;
+        public float MaxHealth=> maxHealth;
     }
 }

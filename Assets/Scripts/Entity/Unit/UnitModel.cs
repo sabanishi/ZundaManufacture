@@ -25,7 +25,6 @@ namespace Sabanishi.ZundaManufacture.Entity
             base.OnCreatedInternal(scope);
             _setMoveVelocitySubject = new Subject<Vector3>().ScopeTo(scope);
             _health = UnitHealthModel.Create<UnitHealthModel>().ScopeTo(scope);
-            _health.SetOffset(new Vector3(0,2.37f,0));
         }
 
         public static UnitModel Create(UnitInfo info)
@@ -38,6 +37,8 @@ namespace Sabanishi.ZundaManufacture.Entity
         private void Setup(UnitInfo info)
         {
             _info = info;
+            
+            _health.SetOffset(new Vector3(0,2.37f,0));
         }
 
         /// <summary>
