@@ -49,3 +49,5 @@ sysinfo.txt
 .DS_Store
 
 Logs/*
+
+!Assets/VoxelImporter/Editor/Scripts/Library
