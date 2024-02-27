@@ -1,6 +1,8 @@
 using GameFramework.Core;
 using GameFramework.LogicSystems;
+using GameFramework.TaskSystems;
 using R3;
+using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.MainGame
 {
@@ -32,6 +34,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
             _view.OnTmpUnitButtonClickObservable.Subscribe(_ => _model.TmpUnitCreate()).RegisterTo(scope);
             _view.OnTmpFactoryButtonClickObservable.Subscribe(_ => _model.TmpFactoryCreate()).RegisterTo(scope);
+            _model.NumZunda.Subscribe(_view.SetNumZunda).RegisterTo(scope);
         }
 
         protected override void DeactivateInternal()
