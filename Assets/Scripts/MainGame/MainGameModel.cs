@@ -1,5 +1,6 @@
 using GameFramework.Core;
 using GameFramework.ModelSystems;
+using R3;
 using Sabanishi.ZundaManufacture.Entity;
 
 namespace Sabanishi.ZundaManufacture.MainGame
@@ -8,9 +9,11 @@ namespace Sabanishi.ZundaManufacture.MainGame
     {
         private UnitStorageModel _unitStorage;
         private FactoryStorageModel _factoryStorage;
+        private ReactiveProperty<int> _numZunda;
         
         public UnitStorageModel UnitStorage => _unitStorage;
         public FactoryStorageModel FactoryStorage => _factoryStorage;
+        public ReadOnlyReactiveProperty<int> NumZunda => _numZunda;
         
         private MainGameModel(object empty) : base(empty)
         {
@@ -20,6 +23,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
         {
             _unitStorage = UnitStorageModel.Create();
             _factoryStorage = FactoryStorageModel.Create();
+            _numZunda = new ReactiveProperty<int>();
         }
 
         protected override void OnDeletedInternal()
@@ -36,6 +40,16 @@ namespace Sabanishi.ZundaManufacture.MainGame
         public void TmpFactoryCreate()
         {
             _factoryStorage.CreateFactory(FactoryType.Rice);
+        }
+
+        public void AddNumZunda(int addition)
+        {
+            _numZunda.Value += addition;
+        }
+        
+        public void SubNumZunda(int subtraction)
+        {
+            _numZunda.Value -= subtraction;
         }
     }
 }
