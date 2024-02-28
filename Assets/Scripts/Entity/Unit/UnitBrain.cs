@@ -49,7 +49,6 @@ namespace Sabanishi.ZundaManufacture.Entity
 
         private void OnUpdateWaitCommand(bool isWaitCommand)
         {
-            DebugLogger.Log("OnUpdateWaitCommand:"+isWaitCommand);
             TreeController.Blackboard.SetBoolean(IsWaitCommandKey,isWaitCommand);
         }
     }

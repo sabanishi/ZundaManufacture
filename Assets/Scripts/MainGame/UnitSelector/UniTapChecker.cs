@@ -45,10 +45,8 @@ namespace Sabanishi.ZundaManufacture.MainGame
                     var obj = hit.collider.gameObject.transform;
                     while (obj != null)
                     {
-                        DebugLogger.Log(obj.gameObject.name);
                         if (obj.CompareTag(TagName.Unit))
                         {
-                            DebugLogger.Log("UnitTapChecker OnTapUnit");
                             _tapSubject.OnNext(obj.gameObject);
                             return;
                         }

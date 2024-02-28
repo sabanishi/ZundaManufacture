@@ -42,7 +42,6 @@ namespace Sabanishi.ZundaManufacture.MainGame
         /// </summary>
         private void OnTapUnit(GameObject unitObject)
         {
-            DebugLogger.Log("OnTapUnit");
             var manager = Services.Get<UnitManager>();
             if (manager.TryGetModelFromGameObject(unitObject, out var unitModel))
             {

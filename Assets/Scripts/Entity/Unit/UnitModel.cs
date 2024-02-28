@@ -87,12 +87,14 @@ namespace Sabanishi.ZundaManufacture.Entity
                     cacheDist = dist;
                     yield return null;
                 }
-
-                //速度を0にする
+            }
+            
+            void OnCompleted()
+            {
                 _setMoveVelocitySubject.OnNext(Vector3.zero);
             }
 
-            return DoActionAsync(Routine);
+            return DoActionAsync(Routine,OnCompleted);
         }
 
         /// <summary>
@@ -112,16 +114,19 @@ namespace Sabanishi.ZundaManufacture.Entity
                         //体力が最大になったら、休憩処理を終了する
                         if (!asyncOperator.IsDone)
                         {
-                            _isResting.Value = false;
                             asyncOperator.Completed();
                         }
                     }
-
                     yield return null;
                 }
             }
 
-            return DoActionAsync(Routine);
+            void CompleteAction()
+            {
+                _isResting.Value = false;
+            }
+
+            return DoActionAsync(Routine,CompleteAction);
         }
 
         /// <summary>
@@ -143,7 +148,6 @@ namespace Sabanishi.ZundaManufacture.Entity
         /// </summary>
         public void StartWaitCommand(Vector3 cameraPos)
         {
-            DebugLogger.Log("UnitModel StartWaitCommand");
             CancelAction();
             _isWaitCommand.Value = true;
             //カメラの方向を向いて停止する
