@@ -24,17 +24,10 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
         protected override void OnCreatedInternal(IScope scope)
         {
-            _unitStorage = UnitStorageModel.Create();
-            _factoryStorage = FactoryStorageModel.Create();
-            _unitSelector = UnitSelectorModel.Create();
-            _numZunda = new ReactiveProperty<int>();
-        }
-
-        protected override void OnDeletedInternal()
-        {
-            _unitStorage.Dispose();
-            _factoryStorage.Dispose();
-            _unitSelector.Dispose();
+            _unitStorage = UnitStorageModel.Create().ScopeTo(scope);
+            _factoryStorage = FactoryStorageModel.Create().ScopeTo(scope);
+            _unitSelector = UnitSelectorModel.Create().ScopeTo(scope);
+            _numZunda = new ReactiveProperty<int>().ScopeTo(scope);
         }
 
         public void TmpUnitCreate()

@@ -1,11 +1,13 @@
 using GameFramework.Core;
 using R3;
+using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
 {
     public class UnitBrain : BehaviourTreeLogic
     {
         private const string HealthKey = "Health";
+        private const string IsWaitCommandKey = "IsWaitCommand";
         
         private readonly UnitModel _model;
         private readonly UnitActor _actor;
@@ -19,7 +21,8 @@ namespace Sabanishi.ZundaManufacture.Entity
         protected override void ActivateInternal(IScope scope)
         {
             base.ActivateInternal(scope);
-            _model.Health.NowValue.Subscribe(OnUpdateHealth).RegisterTo(scope);
+            _model.Health.NowValue.Subscribe(OnUpdateHealth).ScopeTo(scope);
+            _model.IsWaitCommand.Subscribe(OnUpdateWaitCommand).ScopeTo(scope);
         }
 
         protected override void BindActionHandlersInternal()
@@ -42,6 +45,12 @@ namespace Sabanishi.ZundaManufacture.Entity
         private void OnUpdateHealth(float health)
         {
             TreeController.Blackboard.SetFloat(HealthKey,health);
+        }
+
+        private void OnUpdateWaitCommand(bool isWaitCommand)
+        {
+            DebugLogger.Log("OnUpdateWaitCommand:"+isWaitCommand);
+            TreeController.Blackboard.SetBoolean(IsWaitCommandKey,isWaitCommand);
         }
     }
 }

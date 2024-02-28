@@ -12,7 +12,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
     /// </summary>
     public class UniTapChecker:Logic
     {
-        private static readonly LayerMask UnitLayer = LayerMask.NameToLayer(LayerName.Unit);
+        private static readonly int UnitLayer = LayerMask.NameToLayer(LayerName.Unit);
         
         private readonly Camera _myCamera;
 
@@ -40,15 +40,20 @@ namespace Sabanishi.ZundaManufacture.MainGame
                 var ray = _myCamera.ScreenPointToRay(Input.mousePosition);
                 //レイを描画
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
-                if (Physics.Raycast(ray, out var hit,Mathf.Infinity,UnitLayer))
+                if (Physics.Raycast(ray, out var hit,Mathf.Infinity,1<<UnitLayer))
                 {
-                    var hitGimmick = hit.collider.gameObject.GetComponent<UnitTapHitCollider>();
-                    if (hitGimmick == null)
+                    var obj = hit.collider.gameObject.transform;
+                    while (obj != null)
                     {
-                        DebugLogger.LogError("UnitTapHitColliderがアタッチされていません:"+hit.collider.gameObject.name);
-                        return;
+                        DebugLogger.Log(obj.gameObject.name);
+                        if (obj.CompareTag(TagName.Unit))
+                        {
+                            DebugLogger.Log("UnitTapChecker OnTapUnit");
+                            _tapSubject.OnNext(obj.gameObject);
+                            return;
+                        }
+                        obj = obj.parent;
                     }
-                    _tapSubject.OnNext(hitGimmick.GetParent());
                 }
             }
         }

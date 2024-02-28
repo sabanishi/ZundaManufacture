@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   guid: d71bf64b8bcd44bfc93e4f9855b92c5d
-  position: {x: 0, y: -2}
+  position: {x: -189.00002, y: -53.373886}
   title: 
   child: {fileID: -4644518500110352012}
 --- !u!114 &-4644518500110352012
@@ -50,9 +50,10 @@ MonoBehaviour:
   m_Name: SelectorNode
   m_EditorClassIdentifier: 
   guid: 3ffbe0661ba0949388e6134d82e5c78a
-  position: {x: -0.0000052452087, y: 170.50002}
+  position: {x: -188.99998, y: 81.93737}
   title: 
   children:
+  - {fileID: 8502956524747811454}
   - {fileID: -3213814885002829481}
   - {fileID: -44865839379907948}
   forceSuccess: 0
@@ -75,6 +76,27 @@ MonoBehaviour:
   conditions:
     conditions:
     - {fileID: -7012706181042003710}
+--- !u!114 &-1733540722692074109
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d92910406f2c45dfb507fe9d0faba4f, type: 3}
+  m_Name: BooleanCondition
+  m_EditorClassIdentifier: 
+  leftValue:
+    useProperty: 0
+    constValue: 0
+    propertyName: 
+  rightValue:
+    useProperty: 0
+    constValue: 0
+    propertyName: 
+  operatorType: 0
 --- !u!114 &-1280335434749257893
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,7 +110,7 @@ MonoBehaviour:
   m_Name: RandomWalkNode
   m_EditorClassIdentifier: 
   guid: 28fbfe3690ea5400391118b63f879142
-  position: {x: 299.99997, y: 436.99997}
+  position: {x: 300, y: 436.99997}
   title: 
   subRoutine: {fileID: 0}
 --- !u!114 &-44865839379907948
@@ -132,6 +154,8 @@ MonoBehaviour:
   - {fileID: -44865839379907948}
   - {fileID: 7657282228619323064}
   - {fileID: 5264765200549286110}
+  - {fileID: 8502956524747811454}
+  - {fileID: 7717889966648770650}
   blackboardAsset: {fileID: 11400000, guid: 5b7b547fd0a7d43e5b5b15de03c69dbb, type: 2}
 --- !u!114 &5264765200549286110
 MonoBehaviour:
@@ -146,7 +170,7 @@ MonoBehaviour:
   m_Name: RestNode
   m_EditorClassIdentifier: 
   guid: d93bcf7921b294a1da3ee099cbabd83d
-  position: {x: -114.00002, y: 437}
+  position: {x: -114, y: 437}
   title: 
   subRoutine: {fileID: 0}
 --- !u!114 &7657282228619323064
@@ -165,3 +189,40 @@ MonoBehaviour:
   position: {x: 118.1113, y: 436.99997}
   title: 
   subRoutine: {fileID: 0}
+--- !u!114 &7717889966648770650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02751b745a0a64ae8a46d045246f2b11, type: 3}
+  m_Name: LogNode
+  m_EditorClassIdentifier: 
+  guid: 69920b0f957b34ba4b3a44b1c3c8b193
+  position: {x: -412.49997, y: 424.50006}
+  title: 
+  subRoutine: {fileID: 0}
+  logType: 3
+  text: Wait
+--- !u!114 &8502956524747811454
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d18bf1db1334f2d8023426a7851c74, type: 3}
+  m_Name: IfNode
+  m_EditorClassIdentifier: 
+  guid: ec16521fc5c6a46aaa60f7ae8aaaed10
+  position: {x: -412.49997, y: 300}
+  title: IsWaitCommand
+  child: {fileID: 7717889966648770650}
+  conditions:
+    conditions:
+    - {fileID: -1733540722692074109}

@@ -5,7 +5,6 @@ namespace Sabanishi.ZundaManufacture.Entity
 {
     public class UnitTapHitCollider:ActiveGimmick
     {
-        [SerializeField] private GameObject parent;
         [SerializeField] private GameObject root;
         [SerializeField] private GameObject rendererObject;
         protected override void ActivateInternal()
@@ -21,11 +20,6 @@ namespace Sabanishi.ZundaManufacture.Entity
         public void SetRendererActive(bool active)
         {
             rendererObject.SetActive(active);
-        }
-
-        public GameObject GetParent()
-        {
-            return parent;
         }
     }
 }

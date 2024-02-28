@@ -85,7 +85,7 @@ namespace Sabanishi.ZundaManufacture.Entity
         /// <summary>
         /// 現在実行中のコルーチンActionをキャンセルする
         /// </summary>
-        private void CancelAction()
+        private protected void CancelAction()
         {
             _actionScope?.Clear();
         }

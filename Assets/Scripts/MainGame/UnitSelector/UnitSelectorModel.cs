@@ -2,14 +2,16 @@ using GameFramework.Core;
 using GameFramework.ModelSystems;
 using R3;
 using Sabanishi.ZundaManufacture.Entity;
+using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.MainGame
 {
     public class UnitSelectorModel:SingleModel<UnitSelectorModel>
     {
-        private ReactiveProperty<UnitModel> _selectedUnit;
+        private ReactiveProperty<bool> _isOpen;
+        public ReadOnlyReactiveProperty<bool> IsOpen => _isOpen;
 
-        public ReadOnlyReactiveProperty<UnitModel> SelectedUnit => _selectedUnit;
+        private UnitModel _nowSelectedModel;
         
         private UnitSelectorModel(object empty) : base(empty)
         {
@@ -17,17 +19,25 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
         protected override void OnCreatedInternal(IScope scope)
         {
-            _selectedUnit = new ReactiveProperty<UnitModel>();
-        }
-
-        protected override void OnDeletedInternal()
-        {
-            _selectedUnit.Dispose();
+            _isOpen = new ReactiveProperty<bool>().ScopeTo(scope);
         }
         
-        public void SetSelectedUnit(UnitModel unit)
+        public void SetSelectedUnit(UnitModel unit,Vector3 cameraPos=default)
         {
-            _selectedUnit.Value = unit;
+            //null以外のUnitが選択された時、UIを表示する
+            var isNull = unit == null;
+            _isOpen.Value = !isNull;
+
+            if (_nowSelectedModel != null)
+            {
+                //選択中のModelが存在する時、待機状態を解除する
+                _nowSelectedModel.CancelWaitCommand();
+            }
+            _nowSelectedModel = unit;
+
+            if (isNull) return;
+            //Modelが現在行っている作業を中断し、次の命令が来るまで待機させる
+            unit.StartWaitCommand(cameraPos);
         }
     }
 }

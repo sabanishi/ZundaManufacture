@@ -78,7 +78,7 @@ namespace Sabanishi.ZundaManufacture.Entity
         /// <summary>
         /// targetPosを見る
         /// </summary>
-        private void LookTargetPos(Vector3 targetPos)
+        public void LookTargetPos(Vector3 targetPos)
         {
             var nowPos = Body.Position;
             var moveDirection = targetPos - nowPos;

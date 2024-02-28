@@ -31,10 +31,10 @@ namespace Sabanishi.ZundaManufacture.Entity
             var animatorController = new UnitAnimatorController(model, actor);
             
             entity.SetBody(body, false);
-            entity.AddActor(actor);
             entity.AddLogic(presenter);
             entity.AddLogic(brain);
             entity.AddLogic(animatorController);
+            entity.AddActor(actor);
             
             RegisterTask(actor,TaskOrder.Actor);
             RegisterTask(presenter,TaskOrder.Logic);
