@@ -9,10 +9,13 @@ namespace Sabanishi.ZundaManufacture.MainGame
     {
         private UnitStorageModel _unitStorage;
         private FactoryStorageModel _factoryStorage;
+        private UnitSelectorModel _unitSelector;
+        
         private ReactiveProperty<int> _numZunda;
         
         public UnitStorageModel UnitStorage => _unitStorage;
         public FactoryStorageModel FactoryStorage => _factoryStorage;
+        public UnitSelectorModel UnitSelector => _unitSelector;
         public ReadOnlyReactiveProperty<int> NumZunda => _numZunda;
         
         private MainGameModel(object empty) : base(empty)
@@ -21,15 +24,10 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
         protected override void OnCreatedInternal(IScope scope)
         {
-            _unitStorage = UnitStorageModel.Create();
-            _factoryStorage = FactoryStorageModel.Create();
-            _numZunda = new ReactiveProperty<int>();
-        }
-
-        protected override void OnDeletedInternal()
-        {
-            _unitStorage.Dispose();
-            _factoryStorage.Dispose();
+            _unitStorage = UnitStorageModel.Create().ScopeTo(scope);
+            _factoryStorage = FactoryStorageModel.Create().ScopeTo(scope);
+            _unitSelector = UnitSelectorModel.Create().ScopeTo(scope);
+            _numZunda = new ReactiveProperty<int>().ScopeTo(scope);
         }
 
         public void TmpUnitCreate()

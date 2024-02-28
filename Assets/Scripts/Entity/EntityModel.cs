@@ -54,7 +54,7 @@ namespace Sabanishi.ZundaManufacture.Entity
         /// 任意のコルーチンを実行し、その完了フラグを受け取るAsyncOperationHandleを返す
         /// </summary>
         /// <param name="routine">返り値となるAsyncOperatorを引数にとり、行いたいコルーチンを返す関数</param>
-        protected AsyncOperationHandle DoActionAsync(Func<AsyncOperator,IEnumerator> routine)
+        protected AsyncOperationHandle DoActionAsync(Func<AsyncOperator,IEnumerator> routine,Action completedAction=null)
         {
             CancelAction();
             var asyncOperator = new AsyncOperator();
@@ -62,12 +62,14 @@ namespace Sabanishi.ZundaManufacture.Entity
             void OnCompleted()
             {
                 if (asyncOperator.IsDone) return;
+                completedAction?.Invoke();
                 asyncOperator.Completed();
             }
 
             void OnAborted(Exception e=null)
             {
                 if (asyncOperator.IsDone) return;
+                completedAction?.Invoke();
                 asyncOperator.Aborted(e);
             }
 
@@ -85,7 +87,7 @@ namespace Sabanishi.ZundaManufacture.Entity
         /// <summary>
         /// 現在実行中のコルーチンActionをキャンセルする
         /// </summary>
-        private void CancelAction()
+        private protected void CancelAction()
         {
             _actionScope?.Clear();
         }

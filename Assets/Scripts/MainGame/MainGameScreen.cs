@@ -25,19 +25,18 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
         protected override UniTask InitializeInternal(CancellationToken token)
         {
-            _model = MainGameModel.Create();
-            _presenter = new MainGamePresenter(_model, view);
-
             _serviceContainer = new ServiceContainer();
-            
             _taskRunner = new TaskRunner();
             _serviceContainer.Set(_taskRunner);
             
-            //Presenterの要素のうち、シングルトンにするものをServiceContainerに登録
-            _serviceContainer.Set(_presenter.EntityUiManager);
-            
             var layeredTime = new LayeredTime();
             _serviceContainer.Set(layeredTime);
+            
+            _model = MainGameModel.Create();
+            _presenter = new MainGamePresenter(_model, view);
+            
+            //Presenterの要素のうち、シングルトンにするものをServiceContainerに登録
+            _serviceContainer.Set(_presenter.EntityUiManager);
             
             var unitBodyManager = new BodyManager();
             var unitManager = new UnitManager(_taskRunner, unitBodyManager);
@@ -61,7 +60,6 @@ namespace Sabanishi.ZundaManufacture.MainGame
         {
             _model.Dispose();
             _presenter.Dispose();
-            
             _serviceContainer.Dispose();
             
             Destroy(_unitInfoStorage);

@@ -6,6 +6,7 @@ using GameFramework.ActorSystems;
 using GameFramework.BodySystems;
 using GameFramework.Core;
 using GameFramework.CoroutineSystems;
+using GameFramework.GimmickSystems;
 using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
@@ -32,10 +33,7 @@ namespace Sabanishi.ZundaManufacture.Entity
             }
             
             _btControllerProviderParentGimmick = GimmickController.GetGimmicks<BtControllerProviderParentGimmick>(BtControllerProviderParentGimmickName).FirstOrDefault();
-            if (_btControllerProviderParentGimmick == default)
-            {
-                DebugLogger.LogError("BtControllerProviderParentGimmickがアタッチされていません");
-            }
+            CheckIsGimmickNull(_btControllerProviderParentGimmick);
         }
 
         protected override void ActivateInternal(IScope scope)
@@ -104,9 +102,23 @@ namespace Sabanishi.ZundaManufacture.Entity
             _actionScope.Clear();
         }
         
+        /// <summary>
+        /// 自身の実行中のコルーチンのActionTokenを取得する
+        /// </summary>
         protected CancellationToken GetActionToken()
         {
             return _actionScope.Token;
+        }
+
+        /// <summary>
+        /// 引数のGimmickがnullの時、エラーログを出力する
+        /// </summary>
+        protected void CheckIsGimmickNull(Gimmick gimmick)
+        {
+            if (gimmick == default)
+            {
+                DebugLogger.LogError($"[{Body.GameObject.name}]のGimmickが設定されていません");
+            }
         }
     }
 }

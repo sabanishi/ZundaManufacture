@@ -10,12 +10,18 @@ namespace Sabanishi.ZundaManufacture.Entity
     {
         private UnitInfo _info;
         private ReactiveProperty<bool> _isResting;
+        private ReactiveProperty<bool> _isWaitCommand;
+        
         private Subject<Vector3> _setMoveVelocitySubject;
+        private Subject<Vector3> _setEulerAngleSubject;
+        
         private UnitHealthModel _health;
 
         public UnitInfo Info => _info;
         public ReadOnlyReactiveProperty<bool> IsResting => _isResting;
+        public ReadOnlyReactiveProperty<bool> IsWaitCommand => _isWaitCommand;
         public Observable<Vector3> SetMoveVelocityObservable => _setMoveVelocitySubject;
+        public Observable<Vector3> SetEulerAngleObservable => _setEulerAngleSubject;
         public UnitHealthModel Health => _health;
 
         private UnitModel(int id) : base(id)
@@ -26,7 +32,9 @@ namespace Sabanishi.ZundaManufacture.Entity
         {
             base.OnCreatedInternal(scope);
             _isResting = new ReactiveProperty<bool>().ScopeTo(scope);
+            _isWaitCommand = new ReactiveProperty<bool>().ScopeTo(scope);
             _setMoveVelocitySubject = new Subject<Vector3>().ScopeTo(scope);
+            _setEulerAngleSubject = new Subject<Vector3>().ScopeTo(scope);
             _health = UnitHealthModel.Create<UnitHealthModel>().ScopeTo(scope);
         }
 
@@ -79,12 +87,14 @@ namespace Sabanishi.ZundaManufacture.Entity
                     cacheDist = dist;
                     yield return null;
                 }
-                
-                //速度を0にする
+            }
+            
+            void OnCompleted()
+            {
                 _setMoveVelocitySubject.OnNext(Vector3.zero);
             }
 
-            return DoActionAsync(Routine);
+            return DoActionAsync(Routine,OnCompleted);
         }
 
         /// <summary>
@@ -104,16 +114,19 @@ namespace Sabanishi.ZundaManufacture.Entity
                         //体力が最大になったら、休憩処理を終了する
                         if (!asyncOperator.IsDone)
                         {
-                            _isResting.Value = false;
                             asyncOperator.Completed();
                         }
                     }
-
                     yield return null;
                 }
             }
 
-            return DoActionAsync(Routine);
+            void CompleteAction()
+            {
+                _isResting.Value = false;
+            }
+
+            return DoActionAsync(Routine,CompleteAction);
         }
 
         /// <summary>
@@ -128,6 +141,24 @@ namespace Sabanishi.ZundaManufacture.Entity
             }
 
             return DoActionAsync(Routine);
+        }
+
+        /// <summary>
+        /// ユーザーからの命令を待ち始める
+        /// </summary>
+        public void StartWaitCommand(Vector3 cameraPos)
+        {
+            CancelAction();
+            _isWaitCommand.Value = true;
+            //カメラの方向を向いて停止する
+            var dir = cameraPos - Position;
+            _setMoveVelocitySubject.OnNext(Vector3.zero);
+            _setEulerAngleSubject.OnNext(dir);
+        }
+        
+        public void CancelWaitCommand()
+        {
+            _isWaitCommand.Value = false;
         }
     }
 }

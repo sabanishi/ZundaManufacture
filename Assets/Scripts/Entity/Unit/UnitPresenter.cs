@@ -18,7 +18,9 @@ namespace Sabanishi.ZundaManufacture.Entity
         protected override void ActivateInternal(IScope scope)
         {
             base.ActivateInternal(scope);
-            _model.SetMoveVelocityObservable.Subscribe(_actor.SetMoveVelocity).RegisterTo(scope);
+            _model.SetMoveVelocityObservable.Subscribe(_actor.SetMoveVelocity).ScopeTo(scope);
+            _model.SetEulerAngleObservable.Subscribe(_actor.LookTargetPos).ScopeTo(scope);
+            _model.IsWaitCommand.Subscribe(_actor.SetTapRendererActive).ScopeTo(scope);
             RegisterUi(_model.Health);
         }
 

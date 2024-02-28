@@ -9,8 +9,10 @@ namespace Sabanishi.ZundaManufacture.Entity
     public class UnitActor:EntityActor
     {
         private const string AnimatorGimmickKey = "UnitAnimatorGimmick";
+        private const string TapHitColliderGimmickKey = "UnitTapHitCollider";
         
         private readonly UnitAnimatorGimmick _animatorGimmick;
+        private readonly UnitTapHitCollider _tapHitCollider;
 
         private readonly ReactiveProperty<Vector3> _moveVelocity;
         public ReadOnlyReactiveProperty<Vector3> MoveVelocity => _moveVelocity;
@@ -29,22 +31,24 @@ namespace Sabanishi.ZundaManufacture.Entity
             _moveVelocity = new ReactiveProperty<Vector3>().ScopeTo(this);
             
             _animatorGimmick = GimmickController.GetGimmicks<UnitAnimatorGimmick>(AnimatorGimmickKey).FirstOrDefault();
-            if (_animatorGimmick == default)
-            {
-                DebugLogger.LogError($"[{Body.GameObject.name}] UnitAnimatorGimmickが設定されていません");
-            }
+            _tapHitCollider = GimmickController.GetGimmicks<UnitTapHitCollider>(TapHitColliderGimmickKey).FirstOrDefault();
+            
+            CheckIsGimmickNull(_animatorGimmick);
+            CheckIsGimmickNull(_tapHitCollider);
         }
 
         protected override void ActivateInternal(IScope scope)
         {
             base.ActivateInternal(scope);
             _animatorGimmick.Activate();
+            _tapHitCollider.Activate();
         }
 
         protected override void DeactivateInternal()
         {
             base.DeactivateInternal();
             _animatorGimmick.Deactivate();
+            _tapHitCollider.Deactivate();
         }
 
         protected override void UpdateInternal()
@@ -74,7 +78,7 @@ namespace Sabanishi.ZundaManufacture.Entity
         /// <summary>
         /// targetPosを見る
         /// </summary>
-        private void LookTargetPos(Vector3 targetPos)
+        public void LookTargetPos(Vector3 targetPos)
         {
             var nowPos = Body.Position;
             var moveDirection = targetPos - nowPos;
@@ -89,6 +93,14 @@ namespace Sabanishi.ZundaManufacture.Entity
             var angle = Mathf.Atan2(dir.x,dir.z) * Mathf.Rad2Deg;
             var eulerAngle = new Vector3(0, angle, 0);
             Body.Transform.eulerAngles = eulerAngle;
+        }
+        
+        /// <summary>
+        /// 自身が選択されている間、MeshRendererを表示する
+        /// </summary>
+        public void SetTapRendererActive(bool active)
+        {
+            _tapHitCollider.SetRendererActive(active);
         }
     }
 }

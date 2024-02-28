@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GameFramework.ActorSystems;
 using GameFramework.ModelSystems;
 using GameFramework.TaskSystems;
+using UnityEngine;
 
 namespace Sabanishi.ZundaManufacture.Entity
 {
@@ -23,6 +24,7 @@ namespace Sabanishi.ZundaManufacture.Entity
             {
                 var model = pair.Key;
                 var entity = pair.Value;
+                if(entity.GetBody().GameObject==null)continue;
                 DisposeActorEntityInternal(model,entity);
                 entity?.Dispose();
             }
@@ -60,9 +62,30 @@ namespace Sabanishi.ZundaManufacture.Entity
         /// </summary>
         public void DisposeActorEntity(T model)
         {
-            if (!TryGetActorEntity(model, out var entity)) return;
+            if (!TryGetActorEntity(model, out var entity))
+            {
+                DebugLogger.LogWarning("Entityが存在しません");
+                return;
+            }
             entity.Dispose();
             _entities.Remove(model);
+        }
+
+        /// <summary>
+        /// 引数のGameObjectと紐づけられたModelの取得を試みる
+        /// </summary>
+        public bool TryGetModelFromGameObject(GameObject gameObject, out T model)
+        {
+            model = default;
+            foreach (var pair in _entities)
+            {
+                if (pair.Value.GetBody().GameObject == gameObject)
+                {
+                    model = pair.Key;
+                    return true;
+                }
+            }
+            return false;
         }
 
         protected bool TryGetActorEntity(T model, out ActorEntity entity)
