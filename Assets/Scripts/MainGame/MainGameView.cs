@@ -13,6 +13,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
         [SerializeField] private UnitStorageView unitStorage;
         [SerializeField] private FactoryStorageView factoryStorage;
         [SerializeField] private EntityUiManagerView entityUiManagerView;
+        [SerializeField]private UnitSelectorView unitSelectorView;
         [SerializeField] private TMP_Text numZundaText;
 
         public Observable<Unit> OnTmpUnitButtonClickObservable => tmpUnitButton.SafeOnClickAsObservable();
@@ -20,6 +21,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
         public UnitStorageView UnitStorage => unitStorage;
         public FactoryStorageView FactoryStorage => factoryStorage;
         public EntityUiManagerView EntityUiManager => entityUiManagerView;
+        public UnitSelectorView UnitSelector => unitSelectorView;
 
         public void SetNumZunda(int numZunda)
         {

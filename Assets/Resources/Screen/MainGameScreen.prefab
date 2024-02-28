@@ -836,6 +836,51 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &5398720363888575194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9188441801064490083}
+  - component: {fileID: 1124919723267750180}
+  m_Layer: 0
+  m_Name: UnitSelector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9188441801064490083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398720363888575194}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1649432317988315487}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1124919723267750180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398720363888575194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94e5ae0c78140d9a9a528027835416e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCamera: {fileID: 4070325118122708711}
 --- !u!1 &7085613504714954809
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +915,7 @@ RectTransform:
   - {fileID: 4088700304676943748}
   - {fileID: 2620168712395316268}
   - {fileID: 755934724256018119}
+  - {fileID: 9188441801064490083}
   m_Father: {fileID: 3700761355245711259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1009,6 +1055,7 @@ MonoBehaviour:
   unitStorage: {fileID: 5393566080171545965}
   factoryStorage: {fileID: 3150544036858875725}
   entityUiManagerView: {fileID: 6381658582375084813}
+  unitSelectorView: {fileID: 1124919723267750180}
   numZundaText: {fileID: 372099171606573005}
 --- !u!1 &7532516352842851685
 GameObject:

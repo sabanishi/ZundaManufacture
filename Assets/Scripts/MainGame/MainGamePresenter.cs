@@ -13,6 +13,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
         private readonly UnitStoragePresenter _unitStoragePresenter;
         private readonly FactoryStoragePresenter _factoryStoragePresenter;
+        private readonly UnitSelectorPresenter _unitSelectorPresenter;
         private readonly EntityUiManagerPresenter _entityUiManagerPresenter;
         public EntityUiManagerPresenter EntityUiManager => _entityUiManagerPresenter;
 
@@ -23,6 +24,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
 
             _unitStoragePresenter = new UnitStoragePresenter(model.UnitStorage, view.UnitStorage);
             _factoryStoragePresenter = new FactoryStoragePresenter(model.FactoryStorage, view.FactoryStorage);
+            _unitSelectorPresenter = new UnitSelectorPresenter(model.UnitSelector, view.UnitSelector);
             _entityUiManagerPresenter = new EntityUiManagerPresenter(view.EntityUiManager);
         }
 
@@ -30,6 +32,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
         {
             _unitStoragePresenter.Activate();
             _factoryStoragePresenter.Activate();
+            _unitSelectorPresenter.Activate();
             _entityUiManagerPresenter.Activate();
 
             _view.OnTmpUnitButtonClickObservable.Subscribe(_ => _model.TmpUnitCreate()).RegisterTo(scope);
@@ -41,6 +44,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
         {
             _unitStoragePresenter.Deactivate();
             _factoryStoragePresenter.Deactivate();
+            _unitSelectorPresenter.Deactivate();
             _entityUiManagerPresenter.Deactivate();
         }
     }

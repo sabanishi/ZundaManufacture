@@ -23,6 +23,7 @@ namespace Sabanishi.ZundaManufacture.Entity
             {
                 var model = pair.Key;
                 var entity = pair.Value;
+                if(entity.GetBody().GameObject==null)continue;
                 DisposeActorEntityInternal(model,entity);
                 entity?.Dispose();
             }
@@ -60,7 +61,11 @@ namespace Sabanishi.ZundaManufacture.Entity
         /// </summary>
         public void DisposeActorEntity(T model)
         {
-            if (!TryGetActorEntity(model, out var entity)) return;
+            if (!TryGetActorEntity(model, out var entity))
+            {
+                DebugLogger.LogWarning("Entityが存在しません");
+                return;
+            }
             entity.Dispose();
             _entities.Remove(model);
         }

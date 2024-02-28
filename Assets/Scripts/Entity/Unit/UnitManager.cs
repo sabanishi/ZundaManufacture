@@ -29,9 +29,8 @@ namespace Sabanishi.ZundaManufacture.Entity
             var presenter = new UnitPresenter(model, actor);
             var brain = new UnitBrain(model, actor);
             var animatorController = new UnitAnimatorController(model, actor);
-
-            entity.SetBody(body, false);
             
+            entity.SetBody(body, false);
             entity.AddActor(actor);
             entity.AddLogic(presenter);
             entity.AddLogic(brain);

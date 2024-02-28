@@ -10,5 +10,6 @@
 		public const string IgnoreRaycast = "Ignore Raycast";
 		public const string Water = "Water";
 		public const string UI = "UI";
+		public const string Unit = "Unit";
 	}
 }

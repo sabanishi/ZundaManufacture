@@ -9,10 +9,13 @@ namespace Sabanishi.ZundaManufacture.MainGame
     {
         private UnitStorageModel _unitStorage;
         private FactoryStorageModel _factoryStorage;
+        private UnitSelectorModel _unitSelector;
+        
         private ReactiveProperty<int> _numZunda;
         
         public UnitStorageModel UnitStorage => _unitStorage;
         public FactoryStorageModel FactoryStorage => _factoryStorage;
+        public UnitSelectorModel UnitSelector => _unitSelector;
         public ReadOnlyReactiveProperty<int> NumZunda => _numZunda;
         
         private MainGameModel(object empty) : base(empty)
@@ -23,6 +26,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
         {
             _unitStorage = UnitStorageModel.Create();
             _factoryStorage = FactoryStorageModel.Create();
+            _unitSelector = UnitSelectorModel.Create();
             _numZunda = new ReactiveProperty<int>();
         }
 
@@ -30,6 +34,7 @@ namespace Sabanishi.ZundaManufacture.MainGame
         {
             _unitStorage.Dispose();
             _factoryStorage.Dispose();
+            _unitSelector.Dispose();
         }
 
         public void TmpUnitCreate()
