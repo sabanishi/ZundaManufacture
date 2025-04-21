@@ -104,7 +104,7 @@ namespace Sabanishi.ZundaManufacture.Sandbox
         /// <param name="onCanceled">キャンセル時の通知</param>
         /// <param name="onError">エラー時の通知</param>
         /// <param name="cancellationToken">キャンセルハンドリング用</param>
-        public Coroutine StartCoroutine(IEnumerator enumerator, Action onCompleted = null,
+        public Coroutine StartCoroutine(IEnumerator enumerator, CoroutineTimer timer, Action onCompleted = null,
             Action onCanceled = null, Action<Exception> onError = null, CancellationToken cancellationToken = default)
         {
             if (enumerator == null)
@@ -115,7 +115,7 @@ namespace Sabanishi.ZundaManufacture.Sandbox
             // コルーチンの追加
             var coroutineInfo = new CoroutineInfo
             {
-                coroutine = new Coroutine(enumerator)
+                coroutine = new Coroutine(enumerator,timer)
             };
 
             // イベント登録

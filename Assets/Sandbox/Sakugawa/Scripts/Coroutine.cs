@@ -7,6 +7,7 @@ namespace Sabanishi.ZundaManufacture.Sandbox
     public class Coroutine
     {
         private readonly IEnumerator _enumerator;
+        private readonly CoroutineTimer _timer;
         private readonly Stack<object> _stack;
         private object _current;
         private bool _isDone;
@@ -21,9 +22,10 @@ namespace Sabanishi.ZundaManufacture.Sandbox
         /// コンストラクタ
         /// </summary>
         /// <param name="enumerator">処理</param>
-        public Coroutine(IEnumerator enumerator)
+        public Coroutine(IEnumerator enumerator,CoroutineTimer timer)
         {
             _enumerator = enumerator;
+            _timer = timer;
             _stack = new Stack<object>();
             Reset();
         }
@@ -54,6 +56,7 @@ namespace Sabanishi.ZundaManufacture.Sandbox
         /// </summary>
         private void Update(float deltaTime)
         {
+            _timer.DeltaTime = deltaTime;
             // 完了処理
             void Done()
             {
